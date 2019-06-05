@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 
 import Header from './header/containers/Header';
+import Home from './pages/containers/Home';
 
 class App extends Component {
 	constructor() {
@@ -10,7 +11,12 @@ class App extends Component {
 		};
 	}
 	render() {
-		return <Header />;
+		return (
+			<Fragment>
+				<Header />
+				<Home />
+			</Fragment>
+		);
 	}
 }
 
