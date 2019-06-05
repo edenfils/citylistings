@@ -346,7 +346,9 @@ textarea:focus {
 .social_links_wrapper {
     width: 38%;
     float: right;
-	margin-right:-1px;
+    margin-right:-1px;
+    display: flex;
+    justify-content: flex-end;
 }
 .social_links {
     float: left;
