@@ -2,10 +2,10 @@ import React from 'react';
 
 function AboutLeft(props) {
 	return (
-		<div class="about_left_wrapper">
-			<div class="tb_work_txt_wrapper">
-				<div class="abt_txt_box heading_white_wrapper">
-					<div class="tb_left_heading_wraper">
+		<div className="about_left_wrapper">
+			<div className="tb_work_txt_wrapper">
+				<div className="abt_txt_box heading_white_wrapper">
+					<div className="tb_left_heading_wraper">
 						<h3>what do you know about us</h3>
 					</div>
 					<p>
@@ -15,23 +15,23 @@ function AboutLeft(props) {
 						tincidunt ipsumelit. vel orciarel gravida rpis. Quisque sitmi
 						tincidunt ipsum etiau.
 					</p>
-					<div class="abt_checkbox">
+					<div className="abt_checkbox">
 						<ul>
 							<li>
 								<a href="#">
-									<i class="fa fa-check-square" />
+									<i className="fa fa-check-square" />
 									mis nibh nec nibh nec ipsum tincidunt ipsumelit.
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<i class="fa fa-check-square" />
+									<i className="fa fa-check-square" />
 									lementum mis nibh Quisque nibh nec Quisque sitmi leme.
 								</a>
 							</li>
 						</ul>
 					</div>
-					<div class="abt_btn">
+					<div className="abt_btn">
 						<ul>
 							<li>
 								<a href="#">see all rental</a>
