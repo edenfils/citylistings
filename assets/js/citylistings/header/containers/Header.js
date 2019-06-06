@@ -10,7 +10,6 @@ class Header extends Component {
 			<HeaderLayout>
 				<Topbar />
 				<Menu />
-				<div> THIS IS THE HEADER</div>
 			</HeaderLayout>
 		);
 	}

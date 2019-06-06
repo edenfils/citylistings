@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 
 import Header from './header/containers/Header';
 import Home from './pages/containers/Home';
+import AboutUs from './pages/containers/AboutUs';
 import Footer from './footer/containers/Footer';
 
 class App extends Component {
