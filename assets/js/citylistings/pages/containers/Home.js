@@ -7,6 +7,8 @@ import Services from '../../sections/containers/Services';
 import Agents from '../../sections/containers/Agents';
 import Testimonials from '../../sections/containers/Testimonials';
 import Brands from '../../sections/containers/Brands';
+import Enquiry from '../../sections/containers/Enquiry';
+
 class Home extends Component {
 	state = {};
 
@@ -21,6 +23,7 @@ class Home extends Component {
 				<Agents />
 				<Testimonials />
 				<Brands />
+				<Enquiry />
 			</Fragment>
 		);
 	}
