@@ -16,7 +16,7 @@ class App extends Component {
 		return (
 			<Fragment>
 				<Header />
-				<Home />
+				<AboutUs />
 				<Footer />
 			</Fragment>
 		);
