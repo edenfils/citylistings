@@ -18,30 +18,32 @@ function VideoLeft(props) {
 						<ul>
 							<li>
 								<a href="#">
-									<i className="fa fa-check-square" />2000+ Houses and Aparments
+									<i className="fa fa-check-square" />
+									2000+ Houses and Aparments
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<i className="fa fa-check-square" />booking option avalible
+									<i className="fa fa-check-square" />
+									booking option avalible
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<i className="fa fa-check-square" />Map Search and Get
-									Distance
+									<i className="fa fa-check-square" />
+									Map Search and Get Distance
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<i className="fa fa-check-square" />Save Your Facetious
-									Listing
+									<i className="fa fa-check-square" />
+									Save Your Facetious Listing
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									<i className="fa fa-check-square" />24/7 Our Top Agent
-									Available
+									<i className="fa fa-check-square" />
+									24/7 Our Top Agent Available
 								</a>
 							</li>
 						</ul>

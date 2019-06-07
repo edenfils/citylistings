@@ -3,6 +3,7 @@ import React, { Fragment, Component } from 'react';
 import Header from './header/containers/Header';
 import Home from './pages/containers/Home';
 import AboutUs from './pages/containers/AboutUs';
+import ContactUs from './pages/containers/ContactUs';
 import Footer from './footer/containers/Footer';
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
 		return (
 			<Fragment>
 				<Header />
-				<AboutUs />
+				<ContactUs />
 				<Footer />
 			</Fragment>
 		);
