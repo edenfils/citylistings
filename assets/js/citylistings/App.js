@@ -4,6 +4,7 @@ import Header from './header/containers/Header';
 import Home from './pages/containers/Home';
 import AboutUs from './pages/containers/AboutUs';
 import ContactUs from './pages/containers/ContactUs';
+import Listings from './pages/containers/Listings';
 import Footer from './footer/containers/Footer';
 
 class App extends Component {
@@ -17,7 +18,7 @@ class App extends Component {
 		return (
 			<Fragment>
 				<Header />
-				<ContactUs />
+				<Listings />
 				<Footer />
 			</Fragment>
 		);
