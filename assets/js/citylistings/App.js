@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './header/containers/Header';
 import Home from './pages/containers/Home';
 import AboutUs from './pages/containers/AboutUs';
@@ -17,11 +17,17 @@ class App extends Component {
 	}
 	render() {
 		return (
-			<Fragment>
-				<Header />
-				<Housing />
-				<Footer />
-			</Fragment>
+			<Router basename="/">
+				<Fragment>
+					<Header />
+					<Route exact path="/" component={Home} />
+					<Route exact path="/about" component={AboutUs} />
+					<Route exact path="/contact" component={ContactUs} />
+					<Route exact path="/listings" component={Listings} />
+					<Route exact path="/property" component={Housing} />
+					<Footer />
+				</Fragment>
+			</Router>
 		);
 	}
 }

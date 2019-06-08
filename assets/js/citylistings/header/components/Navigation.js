@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Navigation(props) {
 	return (
@@ -7,26 +8,26 @@ function Navigation(props) {
 				<nav id="primary-nav" className="dropdown nav_left_margin">
 					<ul>
 						<li>
-							<a href="#" title="">
+							<NavLink to="/" activeClassName="">
 								home
-							</a>
+							</NavLink>
 						</li>
 
 						<li className="dropdown">
-							<a href="#" title="property_listing_sidebar.html">
+							<NavLink to="/listings" activeClassName="">
 								Listings
-							</a>
+							</NavLink>
 						</li>
 
 						<li>
-							<a href="#" title="">
+							<NavLink to="/about" activeClassName="">
 								About Us
-							</a>
+							</NavLink>
 						</li>
 						<li>
-							<a href="contact_us.html" title="">
+							<NavLink to="/contact" activeClassName="">
 								contact us
-							</a>
+							</NavLink>
 						</li>
 					</ul>
 				</nav>
@@ -40,25 +41,26 @@ function Navigation(props) {
 								<nav id="primary-nav" className="dropdown nav_left_margin">
 									<ul>
 										<li>
-											<a href="#" title="">
+											<NavLink to="/" activeClassName="">
 												home
-											</a>
+											</NavLink>
 										</li>
 
 										<li className="dropdown">
-											<a href="#" title="property_listing_sidebar.html">
+											<NavLink to="/listings" activeClassName="">
 												Listings
-											</a>
+											</NavLink>
 										</li>
+
 										<li>
-											<a href="#" title="">
+											<NavLink to="/about" activeClassName="">
 												About Us
-											</a>
+											</NavLink>
 										</li>
 										<li>
-											<a href="contact_us.html" title="">
+											<NavLink to="/contact" activeClassName="">
 												contact us
-											</a>
+											</NavLink>
 										</li>
 									</ul>
 								</nav>
