@@ -9,7 +9,7 @@ function GridList(props) {
 						<div className="row">{props.children}</div>
 					</div>
 					<div id="list" className="tab-pane fade in active">
-						<div className="row">{props.children}</div>
+						<div className="row" />
 					</div>
 				</div>
 			</div>
