@@ -6,7 +6,13 @@ const path = require('path');
 
 const app = express();
 
+const listingsData = require('./data/listingsData');
+
 app.use('/', serveStatic(path.join(__dirname, '/public')));
+
+app.use('/api/listings', function(req, res ) {
+    res.json(listingsData);
+})
 
 app.get('*', function(req, res){
     res.sendFile(__dirname + '/public/index.html');

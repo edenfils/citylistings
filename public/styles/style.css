@@ -1610,7 +1610,9 @@ height:48px;
 }
 .lp_cntnt .project-head img {
   width: 100%;
-  z-index: 2; }
+  z-index: 2;
+  max-height: 205.3px;
+ }
 
 .lp_cntnt .project-bottom {
   text-align: center;

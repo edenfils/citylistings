@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from 'react';
+import axios from 'axios';
 import Title from '../../sections/containers/Title';
 import ListingsLayout from '../components/ListingsLayout';
 import MainLayout from '../components/MainLayout';
@@ -13,8 +14,32 @@ import TopAgents from '../../widgets/components/TopAgents';
 import Enquiry from '../../sections/containers/Enquiry';
 
 class Listings extends Component {
-	state = {};
+	state = {
+		listingsData: ''
+	};
 
+	componentDidMount() {
+		const self = this;
+		axios
+			.get('/api/listings')
+			.then(function(response) {
+				self.setState(
+					{
+						listingsData: response.data
+					},
+					() => {
+						console.log(self.state.listingsData);
+					}
+				);
+			})
+			.catch(function(error) {
+				// handle error
+				console.log(error);
+			})
+			.finally(function() {
+				// always executed
+			});
+	}
 	render() {
 		return (
 			<Fragment>
@@ -23,7 +48,7 @@ class Listings extends Component {
 					<MainLayout>
 						<View />
 						<GridList>
-							<Property />
+							<Property listingsData={this.state.listingsData} />
 							<Pagination />
 						</GridList>
 					</MainLayout>
