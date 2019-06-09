@@ -17,7 +17,7 @@ class App extends Component {
 	}
 	render() {
 		return (
-			<Router basename="/">
+			<Router>
 				<Fragment>
 					<Header />
 					<Route exact path="/" component={Home} />
