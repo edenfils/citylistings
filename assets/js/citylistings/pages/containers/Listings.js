@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import axios from 'axios';
+import qs from 'query-string';
 import Title from '../../sections/containers/Title';
 import ListingsLayout from '../components/ListingsLayout';
 import MainLayout from '../components/MainLayout';
@@ -22,7 +23,10 @@ class Listings extends Component {
 		min_price: 0,
 		max_price: 2000000,
 		min_area: 0,
-		max_area: 9000
+		max_area: 9000,
+		bedrooms: 1,
+		bathrooms: 1,
+		submit: false
 	};
 
 	// get data to populate forms
@@ -171,14 +175,83 @@ class Listings extends Component {
 			});
 	}
 
-	submitFilters = () => {
+	componentDidUpdate(prevProps, prevState) {
 		const self = this;
-		const { match, location, history } = this.props
-		const { min_price, max_price, min_area, max_area, home_type, city, bedrooms, bathrooms, }
-		history.push(
-			`/listings/?min_price=${min_price}&max_price=${max_price}&min_area=${min_area}&max_area=${max_area}&home_type=${home_type}&city=${city}&bedrooms=${bedrooms}&bathdrooms=${bathrooms}`
-		)
+		const { match, location, history } = self.props;
+
+		// check if the button to submit filters has been pressed
+		if (self.state.submit !== prevState.submit) {
+			// get the query params from the search
+			let queryParams = qs.parse(self.props.location.search);
+			// check in the queryParams if the min_price is not undefined
+			if (queryParams.min_price !== undefined) {
+				// get the params as variables from the queryParams object
+				const {
+					min_price,
+					max_price,
+					min_area,
+					max_area,
+					home_type,
+					city,
+					bedrooms,
+					bathrooms
+				} = queryParams;
+				// use axios to send the get request with the params
+				axios
+					.get(
+						`/api/listings/?min_price=${min_price}&max_price=${max_price}&min_area=${min_area}&max_area=${max_area}&home_type=${home_type}&city=${city}&bedrooms=${bedrooms}&bathrooms=${bathrooms}`
+					)
+					.then(function(response) {
+						self.setState(
+							{
+								listingsData: response.data
+							},
+							() => {
+								self.populateForms();
+								console.log(self.state.listingsData);
+							}
+						);
+					})
+					.catch(function(error) {
+						// handle error
+						console.log(error);
+					})
+					.finally(function() {
+						// always executed
+					});
+			}
+		}
 	}
+
+	submitFilters = e => {
+		e.preventDefault();
+
+		const self = this;
+		let submit = self.state.submit;
+
+		const { match, location, history } = self.props;
+
+		const {
+			min_price,
+			max_price,
+			min_area,
+			max_area,
+			home_type,
+			city,
+			bedrooms,
+			bathrooms
+		} = self.state;
+
+		history.push(
+			`/listings/?min_price=${min_price}&max_price=${max_price}&min_area=${min_area}&max_area=${max_area}&home_type=${home_type}&city=${city}&bedrooms=${bedrooms}&bathrooms=${bathrooms}`
+		);
+
+		let queryParams = qs.parse(this.props.location.search);
+
+		self.setState({
+			submit: !submit
+		});
+	};
 
 	render() {
 		return (
@@ -202,6 +275,7 @@ class Listings extends Component {
 							bathrooms={this.bathrooms}
 							change={this.change}
 							globalState={this.state}
+							submitFilters={this.submitFilters}
 						/>
 						<TopAgents />
 					</SidebarLayout>

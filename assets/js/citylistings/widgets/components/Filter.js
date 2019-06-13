@@ -55,22 +55,27 @@ function Filter(props) {
 									className="div-toggle"
 									data-target=".my-info-1"
 									name="bathrooms"
+									defaultValue="1"
 									onChange={props.change}
 								>
-									<option value="0">bathrooms</option>
+									<option value="1">bathrooms</option>
 									{props.bathrooms()}
 								</select>
 							</div>
 
 							<div className="at-col-default-mar no-mb pricing_inputfield">
-								<select name="bedrooms" onChange={props.change}>
-									<option value="0">bedrooms</option>
+								<select
+									name="bedrooms"
+									onChange={props.change}
+									defaultValue="1"
+								>
+									<option value="1">bedrooms</option>
 									{props.rooms()}
 								</select>
 							</div>
 
 							<div className="row b-search__main-form  price_area_label ">
-								<h5>Area</h5>
+								<h5>Area in Sq Ft</h5>
 								<div className="col-md-6 col-lg-6 at-col-default-mar pricing_inputfield">
 									<input
 										type="text"
@@ -111,7 +116,9 @@ function Filter(props) {
 							<div className="at_btn_form deals_btn blog_cate_btn">
 								<ul>
 									<li>
-										<a href="#">search properties</a>
+										<a href="#" onClick={props.submitFilters}>
+											search properties
+										</a>
 									</li>
 								</ul>
 							</div>
