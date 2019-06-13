@@ -25,76 +25,85 @@ function Filter(props) {
 							id="contentTwo-1"
 						>
 							<div className="at-col-default-mar pricing_inputfield">
-								<input type="text" placeholder="enter your keyword" />
-							</div>
-
-							<div className="at-col-default-mar pricing_inputfield">
-								<input type="text" placeholder="enter city/locality name" />
-							</div>
-
-							<div className="at-col-default-mar pricing_inputfield">
 								<div className="at-col-default-mar">
-									<select>
-										<option value="0" selected>
-											Types
-										</option>
-										<option value="1">Family House</option>
-										<option value="2">Apartment</option>
-										<option value="3">villa</option>
+									<select
+										name="city"
+										onChange={props.change}
+										defaultValue="all"
+									>
+										<option value="all">All Cities</option>
+										{props.cities()}
 									</select>
 								</div>
 							</div>
 
 							<div className="at-col-default-mar pricing_inputfield">
-								<select className="div-toggle" data-target=".my-info-1">
-									<option value="0" selected>
-										02 bathroomn
-									</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
+								<div className="at-col-default-mar">
+									<select
+										name="home_type"
+										onChange={props.change}
+										defaultValue="all"
+									>
+										<option value="all">All Home Types</option>
+										{props.homes()}
+									</select>
+								</div>
+							</div>
+
+							<div className="at-col-default-mar pricing_inputfield">
+								<select
+									className="div-toggle"
+									data-target=".my-info-1"
+									name="bathrooms"
+									onChange={props.change}
+								>
+									<option value="0">bathrooms</option>
+									{props.bathrooms()}
 								</select>
 							</div>
 
 							<div className="at-col-default-mar no-mb pricing_inputfield">
-								<select>
-									<option value="0" selected>
-										02 bedroom
-									</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
+								<select name="bedrooms" onChange={props.change}>
+									<option value="0">bedrooms</option>
+									{props.rooms()}
 								</select>
 							</div>
 
-							<div className="b-search__main-form label price_area_label">
-								<h5>area</h5>
-								<div className="range range_2">
-									<div id="range-price" className="range-box" />
-
+							<div className="row b-search__main-form  price_area_label ">
+								<h5>Area</h5>
+								<div className="col-md-6 col-lg-6 at-col-default-mar pricing_inputfield">
 									<input
 										type="text"
-										id="price"
-										className="price-box"
-										readOnly
+										name="min_area"
+										placeholder={props.globalState.min_area}
+										onChange={props.change}
+									/>
+								</div>
+								<div className="col-md-6 col-lg-6 at-col-default-mar pricing_inputfield">
+									<input
+										type="text"
+										name="max_area"
+										placeholder={props.globalState.max_area}
+										onChange={props.change}
 									/>
 								</div>
 							</div>
-							<div className="b-search__main-form label price_area_label">
-								<h5>price</h5>
-								<div className="range range_2">
-									<div id="range-price_2" className="range-box" />
-
+							<div className="row b-search__main-form  price_area_label ">
+								<h5>Price</h5>
+								<div className="col-md-6 col-lg-6 at-col-default-mar pricing_inputfield">
 									<input
 										type="text"
-										id="price_2"
-										className="price-box"
-										readOnly
+										name="min_price"
+										placeholder={props.globalState.min_price}
+										onChange={props.change}
+									/>
+								</div>
+								<div className="col-md-6 col-lg-6 at-col-default-mar pricing_inputfield">
+									<input
+										type="text"
+										name="max_price"
+										placeholder={props.globalState.max_price}
+										onChange={props.change}
 									/>
 								</div>
 							</div>
@@ -122,9 +131,7 @@ function Filter(props) {
 							<div className="at-col-default-mar pricing_inputfield">
 								<div className="at-col-default-mar">
 									<select>
-										<option value="0" selected>
-											Types
-										</option>
+										<option value="0">Types</option>
 										<option value="1">Family House</option>
 										<option value="2">Apartment</option>
 										<option value="3">villa</option>
@@ -134,9 +141,7 @@ function Filter(props) {
 
 							<div className="at-col-default-mar pricing_inputfield">
 								<select className="div-toggle" data-target=".my-info-1">
-									<option value="0" selected>
-										02 bathroomn
-									</option>
+									<option value="0">02 bathroomn</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -148,9 +153,7 @@ function Filter(props) {
 
 							<div className="at-col-default-mar no-mb pricing_inputfield">
 								<select>
-									<option value="0" selected>
-										02 bedroom
-									</option>
+									<option value="0">02 bedroom</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>

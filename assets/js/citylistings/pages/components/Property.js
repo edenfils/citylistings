@@ -6,7 +6,10 @@ function Property(props) {
 			<Fragment>
 				{props.listingsData.map(item => {
 					return (
-						<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 prs_upcom_slide_first">
+						<div
+							className="col-lg-6 col-md-6 col-sm-6 col-xs-12 prs_upcom_slide_first"
+							key={item.id}
+						>
 							<div className="lp_cntnt">
 								<div className="project-inner project-head">
 									<div className="homes">
@@ -61,7 +64,7 @@ function Property(props) {
 											</li>
 											<li>
 												area
-												<span>More than {item.size}</span>
+												<span>{item.area} sq ft</span>
 											</li>
 											<li>
 												rooms
@@ -74,9 +77,9 @@ function Property(props) {
 										<h3>view map</h3>
 										<div className="lp_deals_icon">
 											<ul>
-												{item.extras.map(extra => {
+												{item.extras.map((extra, j) => {
 													return (
-														<li>
+														<li key={j}>
 															<a>
 																<i className={`flaticon-${extra}`} />
 															</a>
