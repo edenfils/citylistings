@@ -41,7 +41,7 @@ function Property(props) {
 									<div className="homes_cntnt_box">
 										<div className="homes_cntnt_left">
 											<img
-												src="img/lp_img_4.png"
+												src="/img/lp_img_4.png"
 												alt="home"
 												className="img-responsive"
 											/>
@@ -70,6 +70,10 @@ function Property(props) {
 												rooms
 												<span>{item.rooms}</span>
 											</li>
+											<li>
+												bathrooms
+												<span>{item.bathrooms}</span>
+											</li>
 										</ul>
 									</div>
 
@@ -97,13 +101,7 @@ function Property(props) {
 			</Fragment>
 		);
 	} else {
-		return (
-			<div id="preloader">
-				<div id="status">
-					<img src="/img/preloader.gif" id="preloader_image" alt="loader" />
-				</div>
-			</div>
-		);
+		return <h1>There no listings with such criteria</h1>;
 	}
 }
 

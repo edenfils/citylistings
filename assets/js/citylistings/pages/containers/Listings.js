@@ -154,7 +154,7 @@ class Listings extends Component {
 	componentDidMount() {
 		const self = this;
 		axios
-			.get('/api/listings')
+			.get('/api/listings/')
 			.then(function(response) {
 				self.setState(
 					{
@@ -183,6 +183,7 @@ class Listings extends Component {
 		if (self.state.submit !== prevState.submit) {
 			// get the query params from the search
 			let queryParams = qs.parse(self.props.location.search);
+			console.log(queryParams);
 			// check in the queryParams if the min_price is not undefined
 			if (queryParams.min_price !== undefined) {
 				// get the params as variables from the queryParams object
@@ -207,8 +208,7 @@ class Listings extends Component {
 								listingsData: response.data
 							},
 							() => {
-								self.populateForms();
-								console.log(self.state.listingsData);
+								console.log(response.data);
 							}
 						);
 					})
@@ -224,8 +224,6 @@ class Listings extends Component {
 	}
 
 	submitFilters = e => {
-		e.preventDefault();
-
 		const self = this;
 		let submit = self.state.submit;
 
@@ -245,8 +243,6 @@ class Listings extends Component {
 		history.push(
 			`/listings/?min_price=${min_price}&max_price=${max_price}&min_area=${min_area}&max_area=${max_area}&home_type=${home_type}&city=${city}&bedrooms=${bedrooms}&bathrooms=${bathrooms}`
 		);
-
-		let queryParams = qs.parse(this.props.location.search);
 
 		self.setState({
 			submit: !submit
