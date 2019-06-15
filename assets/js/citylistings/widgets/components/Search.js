@@ -7,9 +7,14 @@ function Search(props) {
 			<form className="search_form" role="search">
 				<div className="form-group">
 					<i className="fa fa-search" />
-					<input type="text" className="form-control" placeholder="keywords" />
+					<input
+						type="text"
+						className="form-control"
+						placeholder="keywords"
+						name="search"
+						onChange={props.change}
+					/>
 				</div>
-				<button type="submit">refine</button>
 			</form>
 		</div>
 	);

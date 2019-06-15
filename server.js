@@ -45,7 +45,26 @@ app.use('/api/listings/', function(req, res ) {
       })
     }
 
-    res.json(newData);
+    // in case a search term is passed
+
+    if(req.query.search !== undefined) {
+
+          newData = listingsData.filter( item => {
+          var city = item.city.toLowerCase();
+          var searchText = req.query.search.toLowerCase();
+          var n  = city.match(searchText);
+
+          if (n !== null) {
+             return item;
+          }
+
+          
+       })
+
+       
+    }
+
+    res.json(newData)
 
   } else {
     res.json(listingsData);
@@ -53,6 +72,8 @@ app.use('/api/listings/', function(req, res ) {
 
 
 })
+
+
 
 app.get('*', function(req, res){
     res.sendFile(__dirname + '/public/index.html');

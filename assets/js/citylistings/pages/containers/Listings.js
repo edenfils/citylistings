@@ -17,6 +17,7 @@ import Enquiry from '../../sections/containers/Enquiry';
 class Listings extends Component {
 	state = {
 		listingsData: '',
+		toFilter: '',
 		formsData: '',
 		optionsData: '',
 		city: 'all',
@@ -28,7 +29,9 @@ class Listings extends Component {
 		bedrooms: 1,
 		bathrooms: 1,
 		submit: false,
-		view: 'grid'
+		view: 'grid',
+		search: '',
+		query: false
 	};
 
 	// get data to populate forms
@@ -188,7 +191,8 @@ class Listings extends Component {
 				)
 				.then(function(response) {
 					self.setState({
-						listingsData: response.data
+						listingsData: response.data,
+						toFilter: response.data
 					});
 
 					return axios.get(`/api/listings/`);
@@ -217,7 +221,8 @@ class Listings extends Component {
 				.then(function(response) {
 					self.setState(
 						{
-							listingsData: response.data
+							listingsData: response.data,
+							toFilter: response.data
 						},
 						() => {
 							self.populateForms();
@@ -238,6 +243,7 @@ class Listings extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		const self = this;
 		const { match, location, history } = self.props;
+		let newData = self.state.listingsData;
 
 		// check if the button to submit filters has been pressed
 		if (self.state.submit !== prevState.submit) {
@@ -330,7 +336,41 @@ class Listings extends Component {
 				});
 			}
 		}
+
+		if (self.state.search !== prevState.search) {
+			if (self.state.search != '') {
+				newData = self.state.toFilter;
+				newData = newData.filter(item => {
+					var city = item.city.toLowerCase();
+					var searchText = self.state.search.toLowerCase();
+					var n = city.match(searchText);
+
+					if (n !== null) {
+						return true;
+					}
+				});
+			}
+
+			self.setState({
+				listingsData: newData
+			});
+		}
 	}
+
+	submitQuery = e => {
+		e.preventDefault();
+		let query = this.state.query;
+
+		const { match, location, history } = this.props;
+
+		const { search } = this.state;
+
+		history.push(`/listings/?search=${search}`);
+
+		this.setState({
+			query: !query
+		});
+	};
 
 	submitFilters = e => {
 		const self = this;
@@ -388,7 +428,7 @@ class Listings extends Component {
 					</MainLayout>
 
 					<SidebarLayout>
-						<Search />
+						<Search change={this.change} submitQuery={this.submitQuery} />
 						<Filter
 							homes={this.homes}
 							cities={this.cities}
