@@ -7,11 +7,27 @@ function Property(props) {
 				{props.listingsData.map(item => {
 					return (
 						<div
-							className="col-lg-6 col-md-6 col-sm-6 col-xs-12 prs_upcom_slide_first"
+							className={
+								props.view === 'grid'
+									? 'col-lg-6 col-md-6 col-sm-6 col-xs-12 prs_upcom_slide_first'
+									: 'col-lg-12 col-md-12 col-sm-12 col-xs-12'
+							}
 							key={item.id}
 						>
-							<div className="lp_cntnt">
-								<div className="project-inner project-head">
+							<div
+								className={
+									props.view === 'grid'
+										? 'lp_cntnt'
+										: 'prs_mcc_list_movie_main_wrapper lp_cntnt'
+								}
+							>
+								<div
+									className={
+										props.view === 'grid'
+											? 'project-inner project-head'
+											: 'project-inner project-head inner_projext_head'
+									}
+								>
 									<div className="homes">
 										<a href="#" className="homes-img">
 											<div
@@ -37,60 +53,84 @@ function Property(props) {
 									</div>
 								</div>
 
-								<div className="homes-content">
-									<div className="homes_cntnt_box">
-										<div className="homes_cntnt_left">
-											<img
-												src="/img/lp_img_4.png"
-												alt="home"
-												className="img-responsive"
-											/>
+								<div
+									className={
+										props.view === 'list'
+											? 'prs_mcc_list_movie_img_cont_wrapper'
+											: ''
+									}
+								>
+									<div className="homes-content">
+										<div
+											className={
+												props.view === 'grid'
+													? 'homes_cntnt_box'
+													: 'homes_cntnt_box homes_cntnt_box_2'
+											}
+										>
+											<div
+												className={
+													props.view === 'grid'
+														? 'homes_cntnt_left'
+														: 'homes_cntnt_right'
+												}
+											>
+												{props.view === 'grid' ? (
+													<img
+														src="/img/lp_img_4.png"
+														alt="home"
+														className="img-responsive"
+													/>
+												) : (
+													''
+												)}
+											</div>
+											<div className="homes_cntnt_right">
+												<h3>
+													<a href="#">{item.address}</a>
+												</h3>
+												<p className="homes-address mb-3">
+													<a href="#">{`${item.city}, ${item.state}`}</a>
+												</p>
+											</div>
 										</div>
-										<div className="homes_cntnt_right">
-											<h3>
-												<a href="#">{item.address}</a>
-											</h3>
-											<p className="homes-address mb-3">
-												<a href="#">{`${item.city}, ${item.state}`}</a>
-											</p>
-										</div>
-									</div>
 
-									<div className="home_wrapper_list">
-										<ul className="homes-list clearfix">
-											<li>
-												type
-												<span>{item.type}</span>
-											</li>
-											<li>
-												area
-												<span>{item.area} sq ft</span>
-											</li>
-											<li>
-												rooms
-												<span>{item.rooms}</span>
-											</li>
-											<li>
-												bathrooms
-												<span>{item.bathrooms}</span>
-											</li>
-										</ul>
-									</div>
-
-									<div className="footer">
-										<h3>view map</h3>
-										<div className="lp_deals_icon">
-											<ul>
-												{item.extras.map((extra, j) => {
-													return (
-														<li key={j}>
-															<a>
-																<i className={`flaticon-${extra}`} />
-															</a>
-														</li>
-													);
-												})}
+										<div className="home_wrapper_list">
+											<ul className="homes-list clearfix">
+												<li>
+													type
+													<span>{item.type}</span>
+												</li>
+												<li>
+													area
+													<span>{item.area} sq ft</span>
+												</li>
+												<li>
+													rooms
+													<span>{item.rooms}</span>
+												</li>
+												<li>
+													bathrooms
+													<span>{item.bathrooms}</span>
+												</li>
 											</ul>
+										</div>
+
+										<div className="footer">
+											<h3>view map</h3>
+											<div className="lp_deals_icon">
+												<ul>
+													{item.extras.map((extra, j) => {
+														return (
+															<li key={j}>
+																<a>
+																	<i className={`flaticon-${extra}`} />
+																</a>
+															</li>
+														);
+													})}
+												</ul>
+											</div>
 										</div>
 									</div>
 								</div>

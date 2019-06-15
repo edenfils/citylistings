@@ -27,7 +27,8 @@ class Listings extends Component {
 		max_area: 9000,
 		bedrooms: 1,
 		bathrooms: 1,
-		submit: false
+		submit: false,
+		view: 'grid'
 	};
 
 	// get data to populate forms
@@ -262,14 +263,34 @@ class Listings extends Component {
 						`/api/listings/?min_price=${min_price}&max_price=${max_price}&min_area=${min_area}&max_area=${max_area}&home_type=${home_type}&city=${city}&bedrooms=${bedrooms}&bathrooms=${bathrooms}`
 					)
 					.then(function(response) {
-						self.setState(
-							{
+						let newData;
+						if (self.state.sortby === 'price-dsc') {
+							newData = response.data.sort((a, b) => {
+								return (
+									parseFloat(a.price.replace(/,/g, '')) -
+									parseFloat(b.price.replace(/,/g, ''))
+								);
+							});
+						}
+
+						if (self.state.sortby === 'price-asc') {
+							newData = response.data.sort((a, b) => {
+								return (
+									parseFloat(b.price.replace(/,/g, '')) -
+									parseFloat(a.price.replace(/,/g, ''))
+								);
+							});
+						}
+
+						if (newData !== undefined) {
+							self.setState({
+								listingsData: newData
+							});
+						} else {
+							self.setState({
 								listingsData: response.data
-							},
-							() => {
-								console.log(response.data);
-							}
-						);
+							});
+						}
 					})
 					.catch(function(error) {
 						// handle error
@@ -338,15 +359,30 @@ class Listings extends Component {
 		});
 	};
 
+	setView = e => {
+		let newView = e.target.dataset.view;
+		this.setState(
+			{
+				view: newView
+			},
+			() => {
+				console.log(this.state.view);
+			}
+		);
+	};
+
 	render() {
 		return (
 			<Fragment>
 				<Title />
 				<ListingsLayout>
 					<MainLayout>
-						<View change={this.change} />
-						<GridList>
-							<Property listingsData={this.state.listingsData} />
+						<View change={this.change} setView={this.setView} />
+						<GridList view={this.state.view}>
+							<Property
+								listingsData={this.state.listingsData}
+								view={this.state.view}
+							/>
 							<Pagination />
 						</GridList>
 					</MainLayout>
