@@ -18,6 +18,7 @@ class Listings extends Component {
 	state = {
 		listingsData: '',
 		formsData: '',
+		optionsData: '',
 		city: 'all',
 		home_type: 'all',
 		min_price: 0,
@@ -31,7 +32,17 @@ class Listings extends Component {
 
 	// get data to populate forms
 	populateForms = () => {
-		let cities = this.state.listingsData.map(item => {
+		//variable access the options depending on the params
+		let data;
+		let queryParams = qs.parse(this.props.location.search);
+
+		if (queryParams.min_price !== undefined) {
+			data = this.state.optionsData;
+		} else {
+			data = this.state.listingsData;
+		}
+
+		let cities = data.map(item => {
 			return item.city;
 		});
 
@@ -39,7 +50,7 @@ class Listings extends Component {
 		cities = [...cities];
 		cities = cities.sort();
 
-		let homeType = this.state.listingsData.map(item => {
+		let homeType = data.map(item => {
 			return item.type;
 		});
 
@@ -47,7 +58,7 @@ class Listings extends Component {
 		homeType = [...homeType];
 		homeType = homeType.sort();
 
-		let bedrooms = this.state.listingsData.map(item => {
+		let bedrooms = data.map(item => {
 			return item.rooms;
 		});
 
@@ -55,7 +66,7 @@ class Listings extends Component {
 		bedrooms = [...bedrooms];
 		bedrooms = bedrooms.sort();
 
-		let bathrooms = this.state.listingsData.map(item => {
+		let bathrooms = data.map(item => {
 			return item.bathrooms;
 		});
 
@@ -153,26 +164,74 @@ class Listings extends Component {
 
 	componentDidMount() {
 		const self = this;
-		axios
-			.get('/api/listings/')
-			.then(function(response) {
-				self.setState(
-					{
+
+		// get the query params from the search
+		let queryParams = qs.parse(self.props.location.search);
+		// check in the queryParams if the min_price is not undefined
+		if (queryParams.min_price !== undefined) {
+			// get the params as variables from the queryParams object
+			const {
+				min_price,
+				max_price,
+				min_area,
+				max_area,
+				home_type,
+				city,
+				bedrooms,
+				bathrooms
+			} = queryParams;
+			// use axios to send the get request with the params
+			axios
+				.get(
+					`/api/listings/?min_price=${min_price}&max_price=${max_price}&min_area=${min_area}&max_area=${max_area}&home_type=${home_type}&city=${city}&bedrooms=${bedrooms}&bathrooms=${bathrooms}`
+				)
+				.then(function(response) {
+					self.setState({
 						listingsData: response.data
-					},
-					() => {
-						self.populateForms();
-						console.log(self.state.listingsData);
-					}
-				);
-			})
-			.catch(function(error) {
-				// handle error
-				console.log(error);
-			})
-			.finally(function() {
-				// always executed
-			});
+					});
+
+					return axios.get(`/api/listings/`);
+				})
+				.then(function(response) {
+					self.setState(
+						{
+							optionsData: response.data
+						},
+						() => {
+							self.populateForms();
+							console.log(response.data);
+						}
+					);
+				})
+				.catch(function(error) {
+					// handle error
+					console.log(error);
+				})
+				.finally(function() {
+					// always executed
+				});
+		} else {
+			axios
+				.get('/api/listings/')
+				.then(function(response) {
+					self.setState(
+						{
+							listingsData: response.data
+						},
+						() => {
+							self.populateForms();
+							console.log(self.state.listingsData);
+						}
+					);
+				})
+				.catch(function(error) {
+					// handle error
+					console.log(error);
+				})
+				.finally(function() {
+					// always executed
+				});
+		}
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -221,10 +280,40 @@ class Listings extends Component {
 					});
 			}
 		}
+
+		//sort listings by price
+
+		if (self.state.sortby !== prevState.sortby) {
+			let newData;
+			if (self.state.sortby === 'price-dsc') {
+				newData = self.state.listingsData.sort((a, b) => {
+					return (
+						parseFloat(a.price.replace(/,/g, '')) -
+						parseFloat(b.price.replace(/,/g, ''))
+					);
+				});
+			}
+
+			if (self.state.sortby === 'price-asc') {
+				newData = self.state.listingsData.sort((a, b) => {
+					return (
+						parseFloat(b.price.replace(/,/g, '')) -
+						parseFloat(a.price.replace(/,/g, ''))
+					);
+				});
+			}
+
+			if (newData !== undefined) {
+				self.setState({
+					listingsData: newData
+				});
+			}
+		}
 	}
 
 	submitFilters = e => {
 		const self = this;
+		// variable to produce a change on the state when the data is submitted
 		let submit = self.state.submit;
 
 		const { match, location, history } = self.props;
@@ -255,7 +344,7 @@ class Listings extends Component {
 				<Title />
 				<ListingsLayout>
 					<MainLayout>
-						<View />
+						<View change={this.change} />
 						<GridList>
 							<Property listingsData={this.state.listingsData} />
 							<Pagination />

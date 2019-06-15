@@ -7,11 +7,10 @@ function View(props) {
 				<div className="showpro">
 					<h4>listing style</h4>
 				</div>
-				<select>
-					<option>filter by</option>
-					<option>flat</option>
-					<option>villa</option>
-					<option>rental</option>
+				<select name="sortby" onChange={props.change} defaultValue="default">
+					<option value="default">filter by</option>
+					<option value="price-dsc">Lowest Price</option>
+					<option value="price-asc">Highest Price</option>
 				</select>
 				<div className="list-grid">
 					<ul className="list-inline nav nav-pills">
