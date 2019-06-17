@@ -1,4 +1,6 @@
 import React, { Fragment, Component } from 'react';
+import axios from 'axios';
+import 'owl.carousel';
 import Title from '../../sections/containers/Title';
 import Loader from '../../widgets/components/Loader';
 import ListingsLayout from '../components/ListingsLayout';
@@ -11,7 +13,6 @@ import Share from '../../widgets/components/Share';
 import TopAgents from '../../widgets/components/TopAgents';
 import Latest from '../../sections/containers/Latest';
 import Enquiry from '../../sections/containers/Enquiry';
-import axios from 'axios';
 
 class Housing extends Component {
 	state = {
@@ -19,6 +20,7 @@ class Housing extends Component {
 	};
 
 	componentDidMount() {
+		this.initCarousels();
 		this.getProperty();
 	}
 
@@ -47,6 +49,64 @@ class Housing extends Component {
 					// always executed
 				});
 		}
+	};
+
+	initCarousels = () => {
+		$('.video_img_section .owl-carousel').owlCarousel({
+			loop: true,
+			margin: 10,
+			autoplay: true,
+			responsiveClass: true,
+			smartSpeed: 1200,
+			navText: [
+				'<i class="fa fa-angle-left" aria-hidden="true"></i>',
+				'<i class="fa fa-angle-right" aria-hidden="true"></i>'
+			],
+			responsive: {
+				0: {
+					items: 1,
+					nav: true
+				},
+				600: {
+					items: 1,
+					nav: true
+				},
+				1000: {
+					items: 1,
+					nav: true,
+					loop: true,
+					margin: 20
+				}
+			}
+		});
+
+		$('.sw_team_slider .owl-carousel').owlCarousel({
+			loop: true,
+			margin: 10,
+			autoplay: true,
+			responsiveClass: true,
+			smartSpeed: 1200,
+			navText: [
+				'<i class="flaticon-left-arrow" aria-hidden="true"></i>',
+				'<i class="flaticon-right-arrow" aria-hidden="true"></i>'
+			],
+			responsive: {
+				0: {
+					items: 1,
+					nav: true
+				},
+				600: {
+					items: 1,
+					nav: true
+				},
+				1000: {
+					items: 1,
+					nav: true,
+					loop: true,
+					margin: 20
+				}
+			}
+		});
 	};
 
 	render() {

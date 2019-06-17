@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -54,7 +55,13 @@ module.exports = env => {
 			// 	children: false,
 			// 	filename: '../index.html'
 			// }),
-			new WebpackMd5Hash()
+			new WebpackMd5Hash(),
+			new webpack.ProvidePlugin({
+				$: 'jquery',
+				jQuery: 'jquery',
+				'window.jQuery': 'jquery'
+			  })
+			
 		],
 		optimization: {
 			splitChunks: {
