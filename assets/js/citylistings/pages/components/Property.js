@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 function Property(props) {
 	if (props.listingsData != '') {
@@ -29,7 +30,7 @@ function Property(props) {
 									}
 								>
 									<div className="homes">
-										<a href="#" className="homes-img">
+										<Link to={`/property/${item.slug}`} className="homes-img">
 											<div
 												className={`homes-tag button featured ${item.owner}`}
 											>
@@ -42,7 +43,7 @@ function Property(props) {
 											>
 												{item.purpose}
 											</div>
-										</a>
+										</Link>
 									</div>
 									<div className="homes_img_wrapper">
 										<img
@@ -87,10 +88,14 @@ function Property(props) {
 											</div>
 											<div className="homes_cntnt_right">
 												<h3>
-													<a href="#">{item.address}</a>
+													<Link to={`/property/${item.slug}`}>
+														{item.address}
+													</Link>
 												</h3>
 												<p className="homes-address mb-3">
-													<a href="#">{`${item.city}, ${item.state}`}</a>
+													<Link to={`/property/${item.slug}`}>{`${item.city}, ${
+														item.state
+													}`}</Link>
 												</p>
 											</div>
 										</div>
@@ -123,9 +128,9 @@ function Property(props) {
 													{item.extras.map((extra, j) => {
 														return (
 															<li key={j}>
-																<a>
+																<Link to={`/property/${item.slug}`}>
 																	<i className={`flaticon-${extra}`} />
-																</a>
+																</Link>
 															</li>
 														);
 													})}

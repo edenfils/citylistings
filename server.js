@@ -74,6 +74,20 @@ app.use('/api/listings/', function(req, res ) {
 })
 
 
+// get data for a single property
+app.use('/api/property/:slug', function(req, res) {
+
+  if (req.params.slug !== undefined) {
+
+    let property = listingsData.filter( (item) => {
+      return item.slug == req.params.slug;
+    })
+
+    res.json(property);
+  }
+})
+
+
 
 app.get('*', function(req, res){
     res.sendFile(__dirname + '/public/index.html');

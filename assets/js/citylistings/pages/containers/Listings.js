@@ -355,6 +355,14 @@ class Listings extends Component {
 				listingsData: newData
 			});
 		}
+
+		if (self.state.search !== prevState.search) {
+			if (self.state.search === '') {
+				self.setState({
+					listingsData: self.state.toFilter
+				});
+			}
+		}
 	}
 
 	submitQuery = e => {
