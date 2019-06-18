@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import axios from 'axios';
+import $ from 'jquery';
 import 'owl.carousel';
 import Title from '../../sections/containers/Title';
 import Loader from '../../widgets/components/Loader';
@@ -7,6 +8,7 @@ import ListingsLayout from '../components/ListingsLayout';
 import MainLayout from '../components/MainLayout';
 import ListingInfo from '../components/ListingInfo';
 import Amenities from '../components/Amenities';
+import Gallery from '../components/Gallery';
 import SidebarLayout from '../components/SidebarLayout';
 import Details from '../../widgets/components/Details';
 import Share from '../../widgets/components/Share';
@@ -52,60 +54,36 @@ class Housing extends Component {
 	};
 
 	initCarousels = () => {
-		$('.video_img_section .owl-carousel').owlCarousel({
-			loop: true,
-			margin: 10,
-			autoplay: true,
-			responsiveClass: true,
-			smartSpeed: 1200,
-			navText: [
-				'<i class="fa fa-angle-left" aria-hidden="true"></i>',
-				'<i class="fa fa-angle-right" aria-hidden="true"></i>'
-			],
-			responsive: {
-				0: {
-					items: 1,
-					nav: true
-				},
-				600: {
-					items: 1,
-					nav: true
-				},
-				1000: {
-					items: 1,
-					nav: true,
+		$(document).ready(function() {
+			$('.owl-carousel').each(function() {
+				$(this).owlCarousel({
 					loop: true,
-					margin: 20
-				}
-			}
-		});
-
-		$('.sw_team_slider .owl-carousel').owlCarousel({
-			loop: true,
-			margin: 10,
-			autoplay: true,
-			responsiveClass: true,
-			smartSpeed: 1200,
-			navText: [
-				'<i class="flaticon-left-arrow" aria-hidden="true"></i>',
-				'<i class="flaticon-right-arrow" aria-hidden="true"></i>'
-			],
-			responsive: {
-				0: {
-					items: 1,
-					nav: true
-				},
-				600: {
-					items: 1,
-					nav: true
-				},
-				1000: {
-					items: 1,
-					nav: true,
-					loop: true,
-					margin: 20
-				}
-			}
+					margin: 10,
+					autoplay: true,
+					responsiveClass: true,
+					smartSpeed: 1200,
+					navText: [
+						'<i class="fa fa-angle-left" aria-hidden="true"></i>',
+						'<i class="fa fa-angle-right" aria-hidden="true"></i>'
+					],
+					responsive: {
+						0: {
+							items: 1,
+							nav: true
+						},
+						600: {
+							items: 1,
+							nav: true
+						},
+						1000: {
+							items: 1,
+							nav: true,
+							loop: true,
+							margin: 20
+						}
+					}
+				});
+			});
 		});
 	};
 
@@ -123,6 +101,11 @@ class Housing extends Component {
 
 						{this.state.propertyData !== null ? (
 							<Amenities house={this.state.propertyData} />
+						) : (
+							<Loader />
+						)}
+						{this.state.propertyData !== null ? (
+							<Gallery house={this.state.propertyData} click={this.click} />
 						) : (
 							<Loader />
 						)}

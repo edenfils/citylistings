@@ -4,78 +4,35 @@ function ListingInfo(props) {
 	let property = props.house;
 	let images = property.images;
 	return (
-		<Fragment>
+		<div>
 			<div className="video_img_section_wrapper">
 				<div className="video_img_section">
 					<div className="owl-carousel owl-theme">
-						<div>
-							<div className="item" data-hash="zero">
-								<div className="btn_sale">sell $800,000</div>
-								<img
-									src="/img/galery_blog.jpg"
-									className="img-responsive"
-									alt="video_img"
-								/>
-							</div>
-							<div className="item" data-hash="one">
-								<div className="btn_sale">sell $800,000</div>
-								<img
-									src="/img/galery_blog.jpg"
-									className="img-responsive"
-									alt="video_img"
-								/>
-							</div>
-							<div className="item" data-hash="two">
-								<div className="btn_sale">sell $800,000</div>
-								<img
-									src="/img/galery_blog.jpg"
-									className="img-responsive"
-									alt="video_img"
-								/>
-							</div>
-						</div>
+						{images.map((item, i) => {
+							return (
+								<div className="item" key={i} data-hash={i}>
+									<div className="btn_sale">sell ${property.price}</div>
+									<img src={item} className="img-responsive" alt="video_img" />
+								</div>
+							);
+						})}
 					</div>
 				</div>
 
 				<div className="video_nav_img">
-					<h3>1 of 8 photos</h3>
-					<div className="vedio_nav_wrappper">
-						<div className="vedio_img_btm_wrapper">
-							<a className="button secondary url owl_nav" href="#zero">
-								<div className="gc_filter_cont_overlay" />
-								<img
-									src="/img/galery_1.png"
-									className="img-responsive"
-									alt="nav_img"
-								/>
-							</a>
-						</div>
-					</div>
-					<div className="vedio_nav_wrappper">
-						<div className="vedio_img_btm_wrapper">
-							<div className="gc_filter_cont_overlay" />
-							<a className="button secondary url owl_nav" href="#one">
-								<div className="gc_filter_cont_overlay" />
-								<img
-									src="/img/galery_1.png"
-									className="img-responsive"
-									alt="nav_img"
-								/>
-							</a>
-						</div>
-					</div>
-					<div className="vedio_nav_wrappper">
-						<div className="vedio_img_btm_wrapper">
-							<a className="button secondary url owl_nav" href="#two">
-								<div className="gc_filter_cont_overlay" />
-								<img
-									src="/img/galery_1.png"
-									className="img-responsive"
-									alt="nav_img"
-								/>
-							</a>
-						</div>
-					</div>
+					<h3>1 of {images.length} photos</h3>
+					{images.map((item, j) => {
+						return (
+							<div className="vedio_nav_wrappper" key={j}>
+								<div className="vedio_img_btm_wrapper">
+									<a className="button secondary url owl_nav" href={`#${j}`}>
+										<div className="gc_filter_cont_overlay" />
+										<img src={item} className="img-responsive" alt="nav_img" />
+									</a>
+								</div>
+							</div>
+						);
+					})}
 				</div>
 			</div>
 			<div className="lest_news_cont_wrapper">
@@ -100,7 +57,7 @@ function ListingInfo(props) {
 					</div>
 				</div>
 			</div>
-		</Fragment>
+		</div>
 	);
 }
 

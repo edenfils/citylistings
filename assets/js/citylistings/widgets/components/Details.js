@@ -3,7 +3,7 @@ import React from 'react';
 function Details(props) {
 	let house = props.house;
 	return (
-		<div class="sidebar_widget sidebar_widget_2">
+		<div className="sidebar_widget sidebar_widget_2">
 			<div className="wrapper_second_blog wrapper_second_blog_2 sp_blog_sidebar">
 				<h4>estate details</h4>
 				<div className="blog_wrapper1">
