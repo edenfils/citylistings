@@ -3,7 +3,6 @@ import React, { Fragment } from 'react';
 function Amenities(props) {
 	let outdoor = props.house.outdoor;
 	let indoor = props.house.indoor;
-	console.log(indoor);
 	return (
 		<Fragment>
 			<div className="indoor_wrapper">

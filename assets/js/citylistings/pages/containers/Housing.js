@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from 'react';
 import axios from 'axios';
-import $ from 'jquery';
 import 'owl.carousel';
 import Title from '../../sections/containers/Title';
 import Loader from '../../widgets/components/Loader';
@@ -18,13 +17,27 @@ import Enquiry from '../../sections/containers/Enquiry';
 
 class Housing extends Component {
 	state = {
-		propertyData: null
+		propertyData: null,
+		slug: this.props.match.params.slug
 	};
 
 	componentDidMount() {
-		this.initCarousels();
 		this.getProperty();
 	}
+
+	componentDidUpdate(prevProps, prevState) {
+		let slug = this.props.match.params.slug;
+		let oldSlug = prevProps.match.params.slug;
+		if (slug !== oldSlug) {
+			this.getProperty();
+		}
+	}
+
+	updateSlug = newSlug => {
+		this.setState({
+			slug: newSlug
+		});
+	};
 
 	getProperty = () => {
 		const self = this;
@@ -53,40 +66,6 @@ class Housing extends Component {
 		}
 	};
 
-	initCarousels = () => {
-		$(document).ready(function() {
-			$('.owl-carousel').each(function() {
-				$(this).owlCarousel({
-					loop: true,
-					margin: 10,
-					autoplay: true,
-					responsiveClass: true,
-					smartSpeed: 1200,
-					navText: [
-						'<i class="fa fa-angle-left" aria-hidden="true"></i>',
-						'<i class="fa fa-angle-right" aria-hidden="true"></i>'
-					],
-					responsive: {
-						0: {
-							items: 1,
-							nav: true
-						},
-						600: {
-							items: 1,
-							nav: true
-						},
-						1000: {
-							items: 1,
-							nav: true,
-							loop: true,
-							margin: 20
-						}
-					}
-				});
-			});
-		});
-	};
-
 	render() {
 		return (
 			<Fragment>
@@ -98,14 +77,14 @@ class Housing extends Component {
 						) : (
 							<Loader />
 						)}
-
 						{this.state.propertyData !== null ? (
-							<Amenities house={this.state.propertyData} />
+							<Gallery house={this.state.propertyData} click={this.click} />
 						) : (
 							<Loader />
 						)}
+
 						{this.state.propertyData !== null ? (
-							<Gallery house={this.state.propertyData} click={this.click} />
+							<Amenities house={this.state.propertyData} />
 						) : (
 							<Loader />
 						)}
@@ -121,7 +100,7 @@ class Housing extends Component {
 						<TopAgents />
 					</SidebarLayout>
 				</ListingsLayout>
-				<Latest />
+				<Latest updateSlug={this.updateSlug} />
 				<Enquiry />
 			</Fragment>
 		);
