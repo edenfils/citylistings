@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import Slider from '../../sections/containers/Slider';
+import Parallax from '../../sections/components/Parallax';
 import Deals from '../../sections/containers/Deals';
 import Latest from '../../sections/containers/Latest';
 import About from '../../sections/containers/About';
@@ -15,7 +15,7 @@ class Home extends Component {
 	render() {
 		return (
 			<Fragment>
-				<Slider />
+				<Parallax />
 				<Deals />
 				<Latest />
 				<About />
