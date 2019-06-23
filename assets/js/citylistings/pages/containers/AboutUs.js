@@ -19,7 +19,6 @@ class AboutUs extends Component {
 				<Services />
 				<Video />
 				<Agents />
-				<Testimonials />
 				<Brands />
 				<Enquiry />
 			</Fragment>

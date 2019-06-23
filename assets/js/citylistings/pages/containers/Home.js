@@ -21,7 +21,6 @@ class Home extends Component {
 				<About />
 				<Services />
 				<Agents />
-				<Testimonials />
 				<Brands />
 				<Enquiry />
 			</Fragment>

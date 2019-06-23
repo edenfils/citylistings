@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function EnquiryButton(props) {
 	return (
@@ -6,7 +7,7 @@ function EnquiryButton(props) {
 			<div className="abt_btn enquiry_btn">
 				<ul>
 					<li>
-						<a href="#">contact us</a>
+						<Link to="/contact">contact us</Link>
 					</li>
 				</ul>
 			</div>

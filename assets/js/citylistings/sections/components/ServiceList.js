@@ -4,7 +4,7 @@ import Service from '../components/Service';
 function ServiceList(props) {
 	return (
 		<div className="vk_service_inner_setionn">
-			<Service />
+			<Service services={props.services} />
 		</div>
 	);
 }

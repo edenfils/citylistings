@@ -7,8 +7,23 @@ const path = require('path');
 const app = express();
 
 const listingsData = require('./data/listingsData');
+const servicesData = require('./data/servicesData');
+const testimonials = require('./data/testimonialsData');
+const agentsData = require('./data/agentsData');
 
 app.use('/', serveStatic(path.join(__dirname, '/public')));
+
+app.use('/api/testimonials/', function(req, res) {
+  res.json(testimonials);
+})
+
+app.use('/api/agents/', function(req, res) {
+  res.json(agentsData);
+})
+
+app.use('/api/services/', function(req, res) {
+  res.json(servicesData);
+})
 
 app.use('/api/listings/', function(req, res ) {
     
@@ -86,6 +101,8 @@ app.use('/api/property/:slug', function(req, res) {
     res.json(property);
   }
 })
+
+
 
 
 
