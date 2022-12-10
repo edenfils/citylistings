@@ -56,7 +56,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-async-to-generator": "^7.1.0",
     "bootstrap": "^3.4.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jquery": "^3.4.1",
     "magnific-popup": "^1.1.0",
     "owl.carousel": "^2.3.4",
